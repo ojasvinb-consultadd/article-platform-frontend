@@ -94,19 +94,30 @@ export default function AdminPage() {
                     <span key={t} className="tag">{t}</span>
                   ))}
                   <div className="article-row-actions">
-                      <button
-                        className="btn-danger"
-                        onClick={() => handleDelete(a.id)}
-                      >
-                        Soft Delete
-                      </button>
-                   
+                    {!isDeleted ? (
+                      <>
+                        <button
+                          className="btn-danger"
+                          onClick={() => handleDelete(a.id)}
+                        >
+                          Soft Delete
+                        </button>
+
+                        <button
+                          className="btn-danger"
+                          onClick={() => handleHardDelete(a.id)}
+                        >
+                          Hard Delete
+                        </button>
+                      </>
+                    ) : (
                       <button
                         className="btn-danger"
                         onClick={() => handleHardDelete(a.id)}
                       >
                         Hard Delete
                       </button>
+                    )}
                   </div>
                 </div>
               </div>
