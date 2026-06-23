@@ -440,6 +440,40 @@ button:disabled { opacity: 0.45; cursor: not-allowed; }
   border: 1px solid #4a2e7a;
 }
 
+.admin-filter-btn {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.admin-filter-btn:hover {
+  transform: translateY(-1px);
+}
+
+.admin-filter-btn.all {
+  background: #1e293b;
+  color: #93c5fd;
+  border: 1px solid #3b82f6;
+}
+
+.admin-filter-btn.deleted {
+  background: #3a1d1d;
+  color: #fca5a5;
+  border: 1px solid #dc2626;
+}
+
+.admin-filter-btn.active {
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.08);
+  font-weight: 700;
+}
+
 .deleted-row {
   opacity: 0.45;
 }

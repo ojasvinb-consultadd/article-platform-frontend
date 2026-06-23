@@ -47,23 +47,23 @@ export default function AdminPage() {
   return (
     <Layout wide>
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '2rem' }}>
+        <span className="admin-badge">admin view</span>
         <h1 className="feed-title" style={{ margin: 0 }}>All Articles</h1>
         <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
           <button
-              onClick={() => setView('all')}
-              disabled={view === 'all'}
-            >
-              All Articles
-            </button>
+            className={`admin-filter-btn all ${view === 'all' ? 'active' : ''}`}
+            onClick={() => setView('all')}
+          >
+            All Articles
+          </button>
 
-            <button
-              onClick={() => setView('deleted')}
-              disabled={view === 'deleted'}
-            >
-              Deleted Articles
-            </button>
+          <button
+            className={`admin-filter-btn deleted ${view === 'deleted' ? 'active' : ''}`}
+            onClick={() => setView('deleted')}
+          >
+            Deleted Articles
+          </button>
         </div>
-        <span className="admin-badge">admin view</span>
       </div>
 
       {error && <p className="error-msg">{error}</p>}
@@ -95,21 +95,19 @@ export default function AdminPage() {
                     <span key={t} className="tag">{t}</span>
                   ))}
                   <div className="article-row-actions">
-                    {!isDeleted ? (
                       <button
                         className="btn-danger"
                         onClick={() => handleDelete(a.id)}
                       >
                         Soft Delete
                       </button>
-                    ) : (
+                   
                       <button
                         className="btn-danger"
                         onClick={() => handleHardDelete(a.id)}
                       >
                         Hard Delete
                       </button>
-                    )}
                   </div>
                 </div>
               </div>
