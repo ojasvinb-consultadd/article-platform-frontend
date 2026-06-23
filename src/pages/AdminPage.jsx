@@ -94,7 +94,7 @@ export default function AdminPage() {
                     <span key={t} className="tag">{t}</span>
                   ))}
                   <div className="article-row-actions">
-                    {!isDeleted ? (
+                    {view === 'all' ? (
                       <>
                         <button
                           className="btn-danger"
