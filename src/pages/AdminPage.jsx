@@ -12,10 +12,12 @@ export default function AdminPage() {
   useEffect(() => {
     setLoading(true);
 
-    const loader = 
-    view === 'deleted' ? api.getDeletedArticles : api.getAdminArticles;
-
-    loader.then(setArticles).catch((e) => setError(e.message)).finally(()=> setLoading(false))
+    (view === 'deleted'
+    ? api.getDeletedArticles()
+    : api.getAdminArticles())
+    .then(setArticles)
+    .catch((e) => setError(e.message))
+    .finally(() => setLoading(false));
     
   }, [view]);
 
