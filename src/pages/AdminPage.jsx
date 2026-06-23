@@ -80,7 +80,7 @@ export default function AdminPage() {
                 </div>
                 <div className="article-row-meta">
                   <span className="article-row-author">
-                    {a.authorName || 'Unknown'}
+                    {a.author || 'Unknown'}
                     {a.createdAt && (
                       <> · {new Date(a.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</>
                     )}

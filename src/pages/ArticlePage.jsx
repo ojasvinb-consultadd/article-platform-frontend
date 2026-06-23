@@ -45,7 +45,7 @@ export default function ArticlePage() {
         <h1 className="article-detail-title">{article.title}</h1>
 
         <div className="article-detail-meta">
-          <span>{article.authorName || 'Unknown author'}</span>
+          <span>{article.author || 'Unknown author'}</span>
           {article.createdAt && (
             <span>
               {new Date(article.createdAt).toLocaleDateString('en-US', {
