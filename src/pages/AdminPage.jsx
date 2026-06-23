@@ -47,7 +47,6 @@ export default function AdminPage() {
   return (
     <Layout wide>
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '2rem' }}>
-        <span className="admin-badge">admin view</span>
         <h1 className="feed-title" style={{ margin: 0 }}>All Articles</h1>
         <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
           <button
