@@ -41,4 +41,7 @@ export const api = {
 
   // Admin
   getAdminArticles: () => request('/admin/articles'),
+  getDeletedArticles: () => request('/admin/articles/deleted'),
+  hardDeleteArticle: (id) =>
+    request(`/admin/articles/${id}/hard-delete`, { method: 'DELETE' }),
 };

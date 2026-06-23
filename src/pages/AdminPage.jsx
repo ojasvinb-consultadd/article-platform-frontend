@@ -7,13 +7,17 @@ export default function AdminPage() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [view, setView] = useState('all');
 
   useEffect(() => {
-    api.getAdminArticles()
-      .then(setArticles)
-      .catch((e) => setError(e.message))
-      .finally(() => setLoading(false));
-  }, []);
+    setLoading(true);
+
+    const loader = 
+    view === 'deleted' ? api.getDeletedArticles : api.getAdminArticles;
+
+    loader.then(setArticles).catch((e) => setError(e.message)).finally(()=> setLoading(false))
+    
+  }, [view]);
 
   const handleDelete = async (id) => {
     if (!confirm('Delete this article?')) return;
@@ -25,10 +29,38 @@ export default function AdminPage() {
     }
   };
 
+  const handleHardDelete = async (id) => {
+    if (!confirm('Permanently delete this article? This cannot be undone.')) {
+      return;
+    }
+
+    try {
+      await api.hardDeleteArticle(id);
+      setArticles((prev) => prev.filter((a) => a.id !== id));
+    } catch (e) {
+      alert('Hard delete failed: ' + e.message);
+    }
+  };
+
   return (
     <Layout wide>
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '2rem' }}>
         <h1 className="feed-title" style={{ margin: 0 }}>All Articles</h1>
+        <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+          <button
+              onClick={() => setView('all')}
+              disabled={view === 'all'}
+            >
+              All Articles
+            </button>
+
+            <button
+              onClick={() => setView('deleted')}
+              disabled={view === 'deleted'}
+            >
+              Deleted Articles
+            </button>
+        </div>
         <span className="admin-badge">admin view</span>
       </div>
 
@@ -61,9 +93,19 @@ export default function AdminPage() {
                     <span key={t} className="tag">{t}</span>
                   ))}
                   <div className="article-row-actions">
-                    {!isDeleted && (
-                      <button className="btn-danger" onClick={() => handleDelete(a.id)}>
-                        Delete
+                    {!isDeleted ? (
+                      <button
+                        className="btn-danger"
+                        onClick={() => handleDelete(a.id)}
+                      >
+                        Soft Delete
+                      </button>
+                    ) : (
+                      <button
+                        className="btn-danger"
+                        onClick={() => handleHardDelete(a.id)}
+                      >
+                        Hard Delete
                       </button>
                     )}
                   </div>
